@@ -1,53 +1,57 @@
-IC Security Analysis
+# Security Analysis Pipeline
 
-Este repositório faz parte do desenvolvimento de uma Iniciação Científica na área de cibersegurança.
+Automated pipeline for code security analysis using Semgrep and Docker.
 
-O objetivo do projeto é executar múltiplas ferramentas de análise de código em aproximadamente 50 repositórios do GitHub e comparar os resultados obtidos.
+## What it does?
 
-Para isso, está sendo desenvolvido um pipeline automatizado para análise de segurança de código, utilizando diferentes abordagens:
+- Runs SAST (Static Application Security Testing) automatically on repositories
+- Identifies potential security vulnerabilities
+- Generates structured results for analysis
+- Can be used as a foundation for CI/CD security pipelines
 
-- SAST (Static Application Security Testing)
-- DAST (Dynamic Application Security Testing)
-- Ferramentas baseadas em Inteligência Artificial
+## Tech Stack
 
-Objetivo deste repositório
-
-Este repositório tem como foco os testes iniciais e a construção do pipeline.
-
-Ele serve para:
-
-- Validar o funcionamento das ferramentas
-- Testar o ambiente com Docker
-- Documentar o processo de aprendizado e evolução
-
-Os resultados finais e a análise científica serão organizados em um repositório separado.
-
-Ferramentas utilizadas (até o momento)
-
+- Docker
 - Semgrep
+- Shell Script
 
-Status atual
+## How to use: 
 
-- Pipeline inicial com Docker configurado
-- Execução de análise SAST com Semgrep
-- Integração com outras ferramentas (em andamento)
+### 1. Build the image:
 
-Como executar
-
-Build da imagem:
+```bash
 
 docker build -t ic-security-lab:v1 .
 
-Executar análise:
+``` 
+### Run analysis:
+
+```bash
 
 docker run -v $(pwd):/workspace ic-security-lab:v1 /scripts/run_semgrep.sh <repo_url>
 
-Exemplo de saída:
+```
 
-Um exemplo de resultado gerado pelo Semgrep pode ser encontrado na pasta:
+### Example:
+
+An example of the generated Semgrep result can be found at:
 
 examples/semgrep_example.json
 
-Observações:
+## Status
 
-Este repositório não contém o dataset final da pesquisa. Os resultados aqui são apenas exemplos de execução. O foco principal é a infraestrutura e automação do pipeline
+- [X] Docker pipeline configured
+- [X] SAST analysis with Semgrep
+- [ ] Integration with additional tools
+- [ ] Expansion to DAST and AI - based analysis
+
+## Notes
+
+- This repository does not include the final research dataset
+- The available results are execution examples
+- The main focus is pipeline infrastructure and automation
+
+## Context
+
+This project was developed as part of an academic research (undergraduate research project) in cybersecurity, focused on building an automated pipeline for code analysis using different approaches (SAST, DAST and AI).
+
