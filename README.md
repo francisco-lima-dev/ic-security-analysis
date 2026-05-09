@@ -6,7 +6,7 @@
 
 ## About the research
 
-This pipeline was built to support an undergraduate research project (iniciação científica) comparing the effectiveness of 5 security analysis tools across 50 code samples. The goal is to evaluate detection rates, false positive rates, and coverage across different analysis approaches:
+This pipeline was built to support an undergraduate research project comparing the effectiveness of 5 security analysis tools across 50 code samples. The goal is to evaluate detection rates, false positive rates, and coverage across different analysis approaches:
 
 - 2 SAST tools (static analysis)
 - 1 DAST tool (dynamic analysis)
