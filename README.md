@@ -1,6 +1,7 @@
 # Security Analysis Research Pipeline
 
-> Comparative evaluation of SAST, DAST and AI-based security tools across 50 code samples
+> Building a security analysis research pipeline to benchmark 5 tools (SAST, DAST, AI-based and custom agent) across 50 code samples. Currently operational with Semgrep SAST via Docker. Evaluating detection rates, false positive rates and coverage across different analysis approaches.
+> Most security tool comparisons lack reproducible environments. This pipeline standardizes analysis conditions across tools using Docker, enabling fair comparison of detection rates and false positive rates.
 
 ![Docker](https://img.shields.io/badge/Docker-blue) ![Semgrep](https://img.shields.io/badge/Semgrep-blue) ![Research](https://img.shields.io/badge/Research_Project-green) ![Status](https://img.shields.io/badge/Status-In_Progress-yellow)
 
