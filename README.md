@@ -1,57 +1,87 @@
-# Security Analysis Pipeline
+# Security Analysis Research Pipeline
 
-Automated pipeline for code security analysis using Semgrep and Docker.
+> Building a security analysis research pipeline to benchmark 5 tools (SAST, DAST, AI-based and custom agent) across 50 code samples. Currently operational with Semgrep SAST via Docker. Evaluating detection rates, false positive rates and coverage across different analysis approaches.
+> Most security tool comparisons lack reproducible environments. This pipeline standardizes analysis conditions across tools using Docker, enabling fair comparison of detection rates and false positive rates.
 
-## What it does?
+![Docker](https://img.shields.io/badge/Docker-blue) ![Semgrep](https://img.shields.io/badge/Semgrep-blue) ![Research](https://img.shields.io/badge/Research_Project-green) ![Status](https://img.shields.io/badge/Status-In_Progress-yellow)
 
-- Runs SAST (Static Application Security Testing) automatically on repositories
+## About the research
+
+This pipeline was built to support an undergraduate research project comparing the effectiveness of 5 security analysis tools across 50 code samples. The goal is to evaluate detection rates, false positive rates, and coverage across different analysis approaches:
+
+- 2 SAST tools (static analysis)
+- 1 DAST tool (dynamic analysis)
+- 1 AI-based analysis tool
+- 1 custom-built agent
+
+## What it does
+
+- Runs SAST analysis automatically on any repository
 - Identifies potential security vulnerabilities
-- Generates structured results for analysis
-- Can be used as a foundation for CI/CD security pipelines
+- Generates structured JSON output for research analysis
+- Designed to scale — same pipeline will run DAST and AI-based tools
 
-## Tech Stack
-
-- Docker
-- Semgrep
-- Shell Script
-
-## How to use: 
-
-### 1. Build the image:
-
-```bash
-
-docker build -t ic-security-lab:v1 .
-
-``` 
-### Run analysis:
-
-```bash
-
-docker run -v $(pwd):/workspace ic-security-lab:v1 /scripts/run_semgrep.sh <repo_url>
+## Pipeline architecture
 
 ```
+Repo URL
+  └─→ Docker Container
+        └─→ Semgrep SAST Analysis
+              └─→ Structured JSON Report
+```
 
-### Example:
+## Tech stack
 
-An example of the generated Semgrep result can be found at:
+- **Docker** — isolated, reproducible analysis environment
+- **Semgrep** — static application security testing (SAST)
+- **Shell Script** — pipeline orchestration
 
-examples/semgrep_example.json
+## How to use
 
-## Status
+### 1. Build the image
 
-- [X] Docker pipeline configured
-- [X] SAST analysis with Semgrep
-- [ ] Integration with additional tools
-- [ ] Expansion to DAST and AI - based analysis
+```bash
+docker build -t ic-security-lab:v1 .
+```
+
+### 2. Run analysis
+
+```bash
+docker run -v $(pwd):/workspace ic-security-lab:v1 /scripts/run_semgrep.sh <repo_url>
+```
+
+### Output example
+
+```json
+{
+  "tool": "semgrep",
+  "target_repo": "https://github.com/...",
+  "analysis_date": "2025-05-01",
+  "summary": {
+    "total_findings": 12,
+    "severity": { "high": 3, "medium": 7, "low": 2 }
+  },
+  "findings": [...]
+}
+```
+
+Full example at `examples/semgrep_example.json`
+
+## Research progress
+
+- [x] Docker pipeline configured
+- [x] SAST analysis with Semgrep
+- [ ] Integration with second SAST tool
+- [ ] DAST analysis
+- [ ] AI-based analysis tool
+- [ ] Custom agent
+- [ ] AWS deployment for large-scale runs
+- [ ] Comparative analysis across all 50 samples
 
 ## Notes
 
 - This repository does not include the final research dataset
-- The available results are execution examples
-- The main focus is pipeline infrastructure and automation
+- Available results are execution examples only
+- Main focus is pipeline infrastructure and reproducibility
 
-## Context
-
-This project was developed as part of an academic research (undergraduate research project) in cybersecurity, focused on building an automated pipeline for code analysis using different approaches (SAST, DAST and AI).
 
