@@ -19,7 +19,7 @@ This pipeline was built to support an undergraduate research project comparing t
 - Runs SAST analysis automatically on any repository
 - Identifies potential security vulnerabilities
 - Generates structured JSON output for research analysis
-- Designed to scale — same pipeline will run DAST and AI-based tools
+- Designed to scale. Same pipeline will run DAST and AI-based tools
 
 ## Pipeline architecture
 
@@ -27,7 +27,8 @@ This pipeline was built to support an undergraduate research project comparing t
 Repo URL
   └─→ Docker Container
         └─→ Semgrep SAST Analysis
-              └─→ Structured JSON Report
+                └─→ Raw Json Report (results)
+                       └─→ Structured JSON Report (treated_results)
 ```
 
 ## Tech stack
@@ -53,19 +54,34 @@ docker run -v $(pwd):/workspace ic-security-lab:v1 /scripts/run_semgrep.sh <repo
 ### Output example
 
 ```json
-{
-  "tool": "semgrep",
-  "target_repo": "https://github.com/...",
-  "analysis_date": "2025-05-01",
-  "summary": {
-    "total_findings": 12,
-    "severity": { "high": 3, "medium": 7, "low": 2 }
-  },
-  "findings": [...]
-}
+"version": "1.162.0",
+    "results": [
+        {
+            "check_id": "javascript.browser.security.eval-detected.eval-detected",
+            "path": "10. WhatsApp Chatlist (LRU Cache)/ChatHandler.js",
+            "start": {
+                "line": 54,
+                "col": 41,
+                "offset": 1764
+            },
+            "end": {
+                "line": 54,
+                "col": 69,
+                "offset": 1792
+            },
+            "extra": {
+                "message": "Detected the use of eval(). eval() can be dangerous if used to evaluate dynamic content. If this content can be input from outside the program, this may be a code injection vulnerability. Ensure evaluated content is not definable by external sources.",
+                "metadata": {
+                    "cwe": [
+                        "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')"
+                    ],
+                    "owasp": [
+                        "A03:2021 - Injection",
+                        "A05:2025 - Injection"
+                    ],
 ```
 
-Full example at `examples/semgrep_example.json`
+Full example at `treated_results/Data-Structure-in-Real-Life-Projects.json`
 
 ## Research progress
 
